@@ -1,7 +1,8 @@
 package example.model
 
 import io.micronaut.core.annotation.Introspected
-import java.time.LocalDate
+import java.sql.Date
+
 
 /**
  * 書籍データクラス
@@ -11,5 +12,5 @@ data class Book(
         var id: Int?,
         var name: String,
         var publisher: String?,
-        var publicationDate: LocalDate?
+        var publicationDate: Date?,
 )
