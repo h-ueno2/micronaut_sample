@@ -7,4 +7,6 @@ import org.apache.ibatis.annotations.Mapper
 interface BookMapper {
     fun findAll(): List<Book>
     fun findById(id: Int): Book
+    fun insert(book: Book)
+    fun update(book: Book)
 }

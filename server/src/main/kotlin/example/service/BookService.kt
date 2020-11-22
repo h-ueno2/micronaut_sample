@@ -21,4 +21,21 @@ class BookService(private val sqlSessionFactory: SqlSessionFactory) : BookMapper
             return bookMapper.findById(id)
         }
     }
+
+    override fun insert(book: Book) {
+        sqlSessionFactory.openSession().use { session ->
+            val bookMapper = session.getMapper(BookMapper::class.java)
+            bookMapper.insert(book)
+            session.commit()
+        }
+    }
+
+    override fun update(book: Book) {
+        sqlSessionFactory.openSession().use { session ->
+            val bookMapper = session.getMapper(BookMapper::class.java)
+            bookMapper.update(book)
+            session.commit()
+        }
+    }
+
 }

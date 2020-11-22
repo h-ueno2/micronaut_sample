@@ -23,5 +23,29 @@
         </where>
         ;
     </select>
-
+    <insert id="insert" parameterType="example.model.Book">
+        INSERT INTO book (
+            name,
+            publisher,
+            publication_date,
+            created_at,
+            updated_at
+        ) VALUES (
+            #{name},
+            #{publisher},
+            #{publicationDate},
+            current_timestamp,
+            current_timestamp
+        );
+    </insert>
+    <update id="update" parameterType="example.model.Book">
+        UPDATE book
+        SET
+            name = #{name},
+            publisher = #{publisher},
+            publication_date = #{publicationDate},
+            updated_at = current_timestamp
+        WHERE
+            id = #{id}
+    </update>
 </mapper>
