@@ -3,17 +3,25 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="example.mapper.BookMapper">
-
-    <select id="findById" resultType="example.model.Book">
-        SELECT
+    <sql id="selectBook">
         id,
         name,
         publisher,
         publication_date
+    </sql>
+    <select id="findAll" resultType="example.model.Book">
+        SELECT
+        <include refid="selectBook" />
+        FROM book;
+    </select>
+    <select id="findById" resultType="example.model.Book">
+        SELECT
+        <include refid="selectBook" />
         FROM book
         <where>
             id = #{id}
         </where>
+        ;
     </select>
 
 </mapper>

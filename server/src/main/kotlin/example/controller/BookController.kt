@@ -11,6 +11,16 @@ import io.micronaut.http.annotation.Get
 class BookController(private val bookMapper: BookMapper) {
 
     /**
+     * 書籍情報の全取得。
+     *
+     * @return HttpResponse
+     */
+    @Get("/book")
+    fun read(): HttpResponse<List<Book>> {
+        return HttpResponse.ok(bookMapper.findAll())
+    }
+
+    /**
      * 書籍情報の取得。
      * ID指定
      *

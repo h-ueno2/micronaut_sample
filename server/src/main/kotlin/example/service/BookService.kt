@@ -8,6 +8,13 @@ import javax.inject.Singleton
 @Singleton
 class BookService(private val sqlSessionFactory: SqlSessionFactory) : BookMapper {
 
+    override fun findAll(): List<Book> {
+        sqlSessionFactory.openSession().use { session ->
+            val bookMapper = session.getMapper(BookMapper::class.java)
+            return bookMapper.findAll()
+        }
+    }
+
     override fun findById(id: Int): Book {
         sqlSessionFactory.openSession().use { session ->
             val bookMapper = session.getMapper(BookMapper::class.java)
