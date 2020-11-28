@@ -10,6 +10,12 @@ CREATE TABLE book (
   CONSTRAINT pk_book PRIMARY KEY (id)
 );
 
--- 確認用の初期データ
-INSERT INTO book (name, publisher, publication_date, created_at, updated_at) VALUES ('テスト書籍1', 'テスト出版社A', null, current_timestamp, current_timestamp);
-INSERT INTO book (name, publisher, publication_date, created_at, updated_at) VALUES ('テスト書籍2', 'テスト出版社A', null, current_timestamp, current_timestamp);
+COMMENT ON TABLE book IS '書籍';
+
+COMMENT ON COLUMN book.id IS 'ID';
+COMMENT ON COLUMN book.name IS '書籍名';
+COMMENT ON COLUMN book.publisher IS '出版社';
+COMMENT ON COLUMN book.publication_date IS '出版日';
+COMMENT ON COLUMN book.created_at IS '登録日時';
+COMMENT ON COLUMN book.updated_at IS '更新日時';
+
