@@ -4,6 +4,7 @@ plugins {
     id "org.jetbrains.kotlin.plugin.allopen" version "1.4.10"
     id "com.github.johnrengelman.shadow" version "6.0.0"
     id "io.micronaut.application" version '1.0.5'
+    id 'org.flywaydb.flyway' version '7.3.0'
 }
 
 version "0.1"
@@ -32,6 +33,7 @@ dependencies {
     implementation("io.micronaut:micronaut-http-client")
     implementation("org.mybatis:mybatis:3.4.6")
     implementation("io.micronaut.sql:micronaut-jdbc-hikari")
+    implementation('org.flywaydb:flyway-core:7.3.0')
     runtimeOnly("org.postgresql:postgresql")
     runtimeOnly("ch.qos.logback:logback-classic")
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
@@ -52,6 +54,26 @@ compileTestKotlin {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+}
+
+flyway {
+    // 実行時は ./gradlew flywayMigrate -Penvironment=test などのように指定する。
+    def environment = project.hasProperty("environment") ? project.property("environment") : "development"
+    switch (environment) {
+        case "test":
+            print(environment)
+            url = 'jdbc:postgresql://localhost:5432/test'
+            user = 'postgres'
+            password = 'postgres'
+            break
+        default:
+            // development
+            url = 'jdbc:postgresql://localhost:5432/books'
+            user = 'postgres'
+            password = 'postgres'
+    }
+
+
 }
 
 
