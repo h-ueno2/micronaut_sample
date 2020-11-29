@@ -1,5 +1,7 @@
 import React from "react";
 import { BookData } from "types/BookData";
+import TableRow from "@material-ui/core/TableRow";
+import TableCell from "@material-ui/core/TableCell";
 
 type BookTableRowProps = {
   book: BookData;
@@ -7,11 +9,11 @@ type BookTableRowProps = {
 
 const BookTableRow = (props: BookTableRowProps) => {
   return (
-    <tr>
-      <td>{props.book.name}</td>
-      <td>{props.book.publisher}</td>
-      <td>{props.book.publication_date}</td>
-    </tr>
+    <TableRow>
+      <TableCell>{props.book.name}</TableCell>
+      <TableCell>{props.book.publisher}</TableCell>
+      <TableCell>{props.book.publication_date}</TableCell>
+    </TableRow>
   );
 };
 
