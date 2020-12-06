@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BookData } from "types/BookData";
 import Paper from "@material-ui/core/Paper";
 import BookTableRow from "./BookTableRow";
@@ -6,30 +6,28 @@ import TableContainer from "@material-ui/core/TableContainer";
 import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
 import TableBody from "@material-ui/core/TableBody";
-
-const dammyData: BookData[] = [
-  {
-    id: 1,
-    name: "test book",
-    publisher: "テスト出版社",
-    publication_date: "2020-11-20",
-  },
-  {
-    id: 2,
-    name: "テスト書籍",
-    publisher: "テスト出版社",
-    publication_date: "2020-11-21",
-  },
-  {
-    id: 3,
-    name: "あああ",
-    publisher: "テスト出版社",
-    publication_date: "2020-11-22",
-  },
-];
+import axios, { AxiosError } from "axios";
+import { ResponseGetBook } from "types/ResponseGetBook";
+import { ResponseError } from "types/ResponseError";
 
 const BookTable = () => {
-  const bookDatas = dammyData;
+  const [bookDatas, setBookDatas] = useState([] as Array<BookData>);
+  useEffect(() => {
+    axios
+      .create({
+        baseURL: "http://localhost:8080",
+      })
+      .get<ResponseGetBook>("/book")
+      .then((res) => {
+        setBookDatas(res.data.books);
+      })
+      .catch((e: AxiosError<ResponseError>) => {
+        if (e.response !== undefined) {
+          console.error(e.response.data.error);
+        }
+      });
+  });
+
   const bookDataRows = bookDatas.map((b) => {
     return <BookTableRow key={b.id} book={b} />;
   });
