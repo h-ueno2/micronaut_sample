@@ -1,6 +1,9 @@
 micronaut:
   application:
     name: helloworld
+  server:
+    cors:
+      enabled: true
 datasources:
   default:
     url: jdbc:postgresql://localhost:5432/books

@@ -2,6 +2,7 @@ package example.controller
 
 import example.mapper.BookMapper
 import example.model.Book
+import example.model.BookResponse
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Get
@@ -18,8 +19,8 @@ class BookController(private val bookMapper: BookMapper) {
      * @return HttpResponse
      */
     @Get("/book")
-    fun read(): HttpResponse<List<Book>> {
-        return HttpResponse.ok(bookMapper.findAll())
+    fun read(): HttpResponse<BookResponse> {
+        return HttpResponse.ok(BookResponse(bookMapper.findAll()))
     }
 
     /**
