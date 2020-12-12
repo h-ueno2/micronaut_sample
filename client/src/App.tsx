@@ -1,10 +1,10 @@
 import React from "react";
-import BookTable from "./components/BookTable";
+import Main from "./components/Main";
 
 function App() {
   return (
     <div className="App">
-      <BookTable />
+      <Main />
     </div>
   );
 }
