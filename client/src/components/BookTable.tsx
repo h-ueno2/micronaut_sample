@@ -6,20 +6,18 @@ import TableContainer from "@material-ui/core/TableContainer";
 import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
 import TableBody from "@material-ui/core/TableBody";
-import axios, { AxiosError } from "axios";
-import { ResponseGetBook } from "types/ResponseGetBook";
+import { AxiosError } from "axios";
 import { ResponseError } from "types/ResponseError";
+import ApiConnector from "module/ApiConnector";
 
 const BookTable = () => {
   const [bookDatas, setBookDatas] = useState([] as Array<BookData>);
   useEffect(() => {
-    axios
-      .create({
-        baseURL: "http://localhost:8080",
-      })
-      .get<ResponseGetBook>("/book")
-      .then((res) => {
-        setBookDatas(res.data.books);
+    const connect = new ApiConnector();
+    connect
+      .getBook()
+      .then((books) => {
+        setBookDatas(books);
       })
       .catch((e: AxiosError<ResponseError>) => {
         if (e.response !== undefined) {
