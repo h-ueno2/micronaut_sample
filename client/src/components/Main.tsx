@@ -1,12 +1,14 @@
 import React from "react";
 import BookTable from "components/BookTable";
+import Header from "components/Header";
+import Footer from "components/Footer";
 
 const Main = () => {
   return (
     <div>
-      <div>Header</div>
+      <Header />
       <BookTable />
-      <div>Footer</div>
+      <Footer />
     </div>
   );
 };
